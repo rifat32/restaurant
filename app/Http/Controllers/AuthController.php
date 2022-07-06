@@ -40,7 +40,14 @@ class AuthController extends Controller
 
 
         $user = auth()->user();
+
+        $user = User::with("restaurant")
+        ->where([
+            "id" => $user->id
+        ])
+        ->first();
         $user->token  = auth()->user()->createToken('authToken')->accessToken;
+
 
 
         return response()->json($user, 200);
@@ -77,6 +84,11 @@ class AuthController extends Controller
     {
         // @@@@@@@@@@ should connect with restaurent
         $user = auth()->user();
+        $user = User::with("restaurant")
+        ->where([
+            "id" => $user->id
+        ])
+        ->first();
         return response()->json($user, 200);
     }
 }

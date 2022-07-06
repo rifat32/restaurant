@@ -19,6 +19,12 @@ class RestaurantController extends Controller
             'Address' => 'required|string',
             'PostCode' => 'required',
             'enable_question' => 'required',
+            "About" => 'required',
+            "Webpage" => 'required',
+            "PhoneNumber" => 'required',
+            "EmailAddress" => 'required',
+            "homeText" => 'required',
+            "AdditionalInformation" => 'required',
         ]);
 
         if ($validator->fails()) {

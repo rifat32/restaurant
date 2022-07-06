@@ -15,4 +15,7 @@ class Menu extends Model
         "restaurant_id",
         "icon"
     ];
+    public function dishes() {
+        return $this->hasMany(Dish::class,'menu_id','id');
+    }
 }

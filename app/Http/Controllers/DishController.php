@@ -96,8 +96,9 @@ class DishController extends Controller
     // ##################################################
     public function getAllDishes($restaurantId, Request $request)
     {
-        // with
-        $dishVariations = Dish::where([
+
+
+        $dishVariations = Dish::with("menu")->where([
             "restaurant_id" => $restaurantId
         ])
             ->get();
@@ -111,7 +112,7 @@ class DishController extends Controller
     public function getDisuBuMenuId($menuId, Request $request)
     {
         // with variation, dis_variation
-        $dishVariations = Dish::where([
+        $dishVariations = Dish::with("menu")->where([
             "menu_id" => $menuId
         ])
             ->get();
@@ -123,7 +124,7 @@ class DishController extends Controller
     // ##################################################
     public function getDishByDealId($dealId, Request $request)
     {
-        $dishVariations = Dish::with("deal")->where([
+        $dishVariations = Dish::with("deal","menu")->where([
             "id" => $dealId
         ])
             ->get();
@@ -136,7 +137,7 @@ class DishController extends Controller
     public function getAllDishesWithDeals($dishId, Request $request)
     {
         // with variation, dis_variation
-        $dishVariations = Dish::with("deal")->get();
+        $dishVariations = Dish::with("deal","menu")->get();
 
         return response($dishVariations, 200);
     }

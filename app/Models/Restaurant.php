@@ -16,7 +16,13 @@ class Restaurant extends Model
         "Status",
         "Key_ID",
         "expiry_date",
-        "enable_question"
+        "enable_question",
+        "About",
+        "Webpage",
+        "PhoneNumber",
+        "EmailAddress",
+        "homeText",
+        "AdditionalInformation",
     ];
 
     public function owner() {

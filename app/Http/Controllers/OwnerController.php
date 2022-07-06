@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OwnerRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,18 +16,13 @@ class OwnerController extends Controller
     // ##################################################
     // This method is to store user
     // ##################################################
-    public function createUser(Request $request)
+    public function createUser(OwnerRequest $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'email|required|unique:users,email',
-            'password' => 'required|string|min:6',
-            'first_Name' => 'required',
-            'phone' => 'nullable',
-            'last_Name' => 'nullable'
-        ]);
 
-        $validatedData = $validator->validated();
+
+
+        $validatedData = $request->validated();
 
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['remember_token'] = Str::random(10);

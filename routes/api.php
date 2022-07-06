@@ -142,6 +142,7 @@ Route::delete('/notification/{notificationId}', [NotificationController::class, 
 Route::post('/menu/{restaurantId}', [MenuController::class, "storeMenu"]);
 Route::patch('/menu/update/{MenuId}', [MenuController::class, "updateMenu"]);
 Route::get('/menu/{menuId}', [MenuController::class, "getMenuById"]);
+// Route::get('/menu/get-menu-by-restaurant-id{restaurantId}', [MenuController::class, "getMenuByRestaurantId"]);
 Route::get('/menu/AllbuId/{restaurantId}', [MenuController::class, "getMenuByRestaurantId"]);
 Route::post('/menu/multiple/{restaurantId}', [MenuController::class, "storeMultipleMenu"]);
 Route::patch('/menu/Edit/multiple', [MenuController::class, "updateMultipleMenu"]);

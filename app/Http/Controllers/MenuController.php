@@ -15,6 +15,7 @@ class MenuController extends Controller
         $body = $request->toArray();
         $body["restaurant_id"] = $restaurantId;
 
+
         $menu =  Menu::create($body);
 
 
@@ -33,7 +34,7 @@ class MenuController extends Controller
                 'restaurant_id'
             )
         )
-            // ->with("somthing")
+        ->with("dishes")
 
             ->first();
 
@@ -46,7 +47,7 @@ class MenuController extends Controller
     // ##################################################
     public function getMenuById($menuId, Request $request)
     {
-        $menu = Menu::where([
+        $menu = Menu::with("dishes")->where([
             "id" => $menuId
         ])
             ->first();
@@ -54,12 +55,13 @@ class MenuController extends Controller
 
         return response($menu, 201);
     }
+
     // ##################################################
     // This method is to get menu by restaurant id
     // ##################################################
     public function getMenuByRestaurantId($restaurantId, Request $request)
     {
-        $menu = Menu::where([
+        $menu = Menu::with("dishes")->where([
             "restaurant_id" => $restaurantId
         ])
             ->get();
@@ -97,7 +99,7 @@ class MenuController extends Controller
             $updatedMenu =    tap(Menu::where(["id" => $menu["id"]]))->update(
                 collect($menu)->only(['name', 'description'])->all()
             )
-                // ->with("somthing")
+                 ->with("dishes")
                 ->first();
 
             array_push($menus_array, $updatedMenu);
@@ -114,7 +116,7 @@ class MenuController extends Controller
     public function updateMenu2(Request $request)
     {
 
-        $menu =    tap(Menu::where(["id" => $request->id]))->update(
+        $menu =    tap(Menu::with("dishes")->where(["id" => $request->id]))->update(
             $request->only(
                 'name',
                 'description'

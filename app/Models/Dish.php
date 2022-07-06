@@ -28,4 +28,7 @@ class Dish extends Model
     public function deal() {
         return $this->hasOne(Deal::class,"dish_id","id");
     }
+    public function menu() {
+        return $this->belongsTo(Dish::class,'menu_id','id');
+    }
 }
